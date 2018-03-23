@@ -1,16 +1,26 @@
 {% extends "base_generic.html" %}
 
 {% block header %}
-<h1>Local Library Home</h1>
+<div class="col-6">
+    <button id="home-button" type="button" class="btn btn-primary"> {{header_title}} </button>
+</div>
 
-  <p>Welcome to <em>LocalLibrary</em>, a very basic Django website developed as a tutorial example on the Mozilla Developer Network.</p>
+<div class="col-6">
+  <button type="button" class="btn btn-primary">{{header_two}}</button>
+  <button type="button" class="btn btn-primary">{{header_three}}</button>
+  <button type="button" class="btn btn-primary">{{header_four}}</button>
+  <button type="button" class="btn btn-secondary">{{header_five}}</button>
+</div>
 
-<h2>Dynamic content</h2>
+{% endblock %}
 
-  <p>The library has the following record counts:</p>
-  <ul>
-    <li><strong>Number of Equations:</strong> {{ num_equations }}</li>
-    <li><strong>Test Equation:</strong> {{ test }}</li>
-  </ul>
+{% block home %}
+<h1>{{landing_page_home_tag}}</h1>
+<br>
+<h2>{{landing_page_home_descrip}}</h2>
+<br>
+<button type="button" class="btn btn-primary">{{landing_page_trial}}</button>
+<br>
+<p>or {{landing_page_purchase}}</p>
 
 {% endblock %}
