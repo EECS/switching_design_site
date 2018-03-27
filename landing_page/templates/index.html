@@ -2,29 +2,57 @@
 
 {% block title %}
 <title>{{header_title}}</title>
+
 {% endblock %}
 
 {% block header %}
-<div class="col-6">
+
+<div id = "site-title"class="col-6">
     <button id="home-button" type="button" class="btn btn-primary"> {{header_title}} </button>
 </div>
 
-<div class="col-6">
-  <button type="button" class="btn btn-primary">{{header_two}}</button>
-  <button type="button" class="btn btn-primary">{{header_three}}</button>
-  <button type="button" class="btn btn-primary">{{header_four}}</button>
-  <button type="button" class="btn btn-secondary">{{header_five}}</button>
+<div id="header-support" class="col-6">
+  <button type="button" class="btn btn-primary"> Content </button>
+
+  {% if show_testimonials %}
+  <button type="button" class="btn btn-primary">Testimonials</button>
+  {% endif %}
+
+  <button type="button" class="btn btn-primary"> Design Center </button>
+  <button type="button" class="btn btn-primary"> Contact </button>
+  <button type="button" class="btn btn-secondary">Try Free for {{trial_length}} Days </button>
 </div>
 
 {% endblock %}
 
 {% block home %}
-<h1>{{landing_page_home_tag}}</h1>
-<br>
-<h2>{{landing_page_home_descrip}}</h2>
-<br>
-<button type="button" class="btn btn-primary">{{landing_page_trial}}</button>
-<br>
-<p>or {{landing_page_purchase}}</p>
+<div id="home-row-content">
+  <h1>Professional circuit design in 5 minutes.</h1>
+  {% for i in tag_break_lines %}
+  <br>
+  {% endfor %}
+  <h2>Design Electronics provides a simplified understanding to complex circuit design problems.</h2>
+  <br>
+  <button type="button" class="btn btn-primary">Try Free for {{trial_length}} Days</button>
+  <br>
+  <p>or <u>purchase now</u>.</p>
+</div>
 
+<div id="home-row-picture">
+    {% load static %}
+    <img src="{% static '/img/power-converter.jpg' %}" class="img-fluid" alt="Power Converter" height="400 px">
+</div>
+
+{% endblock %}
+
+{% block content %}
+<div id="content-row-header">
+    <h1>Professional circuit design in 5 minutes.</h1>
+    <br>
+    <h2>Design Electronics provides a simplified understanding to complex circuit design problems.</h2>
+    <br>
+    <button type="button" class="btn btn-primary">Try Free for {{trial_length}} Days</button>
+    <br>
+    <p>or <u>purchase now</u>.</p>
+  </div>
 {% endblock %}

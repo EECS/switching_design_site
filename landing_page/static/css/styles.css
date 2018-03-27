@@ -1,0 +1,23 @@
+#container-custom{
+    margin:20px;
+}
+
+#header-row{
+    display: flex;
+    border-bottom-style: solid;
+    border-bottom-color:black;
+    border-bottom-width: 1px;
+}
+
+#header-support{
+    margin-left: auto;
+}
+
+#home-row{
+    display: flex;
+    margin-top:100px;
+    border-bottom-style: solid;
+    border-bottom-color:black;
+    border-bottom-width: 1px;
+    height:600px;
+}

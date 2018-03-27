@@ -16,7 +16,7 @@
 
 <body>
 
-  <div class="container-fluid">
+  <div id="container-custom" class="container-fluid">
     
     <div id="header-row" class="row">
       {% block header %}
@@ -24,11 +24,14 @@
     </div>
     
     <div id="home-row" class="row">
-      <div class="col-6">
-          {% block home %}
-          {% endblock %}
-      </div>
+      {% block home %}
+      {% endblock %}
     </div>
+
+    <div id="content-row" class="row">
+        {% block content %}
+        {% endblock %}
+      </div>
     
   </div>
 </body>
