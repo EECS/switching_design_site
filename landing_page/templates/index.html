@@ -98,4 +98,34 @@
     </div>
   {% endif %}
 </div>
+
+<div id="content-row-example">
+    <div id="example-title">
+      <h3>Example Design in the Design Center</h4>
+    </div>
+
+    <div id="example-design-picture">
+      {% load static %}
+      <img src="{% static '/img/buck-converter.jpg' %}" alt="Buck Converter" height="400 px">
+    </div>
+
+    <div id="example-design-input-title">
+      <h4>Input Parameters</h4>
+    </div>
+
+    <div id="example-parameters">
+      <div id="example-parameters-left-column">
+        <p>Input Voltage: {{input_voltage}} V</p>
+        <p>Output Current: {{output_current}} A</p>
+        <p>Output Inductance: {{inductance}} &micro;H</p>
+      </div>
+
+      <div id="example-parameters-right-column">
+        <p>Output Voltage: {{output_voltage}} V</p>
+        <p>Output Capacitance: {{capacitance}} &micro;F</p>
+        <p>Inductor DC Resistance: {{inductor_res}} m&#8486;</p>
+      </div>
+  </div>
+    
+</div>
 {% endblock %}
