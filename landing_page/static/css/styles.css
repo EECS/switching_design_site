@@ -1,9 +1,9 @@
-#container-custom{
-    margin:20px;
-}
-
 #header-row{
     display: flex;
+    position: fixed;
+    width: 100%;
+    background-color: lightblue;
+    padding:15px;
     border-bottom-style: solid;
     border-bottom-color:black;
     border-bottom-width: 1px;
@@ -15,9 +15,33 @@
 
 #home-row{
     display: flex;
-    margin-top:100px;
+    margin: 200px 200px 0px 200px;
     border-bottom-style: solid;
     border-bottom-color:black;
     border-bottom-width: 1px;
     height:600px;
+}
+
+#content-row{
+    margin: 0px 200px 0px 200px;
+}
+
+#content-row-header{
+    margin:50px 0px;
+    text-align: center;
+}
+
+.card-deck{
+    border-bottom-style: solid;
+    border-bottom-color:black;
+    border-bottom-width: 1px;
+    display: flex;
+    justify-content: center;
+}
+
+.card{
+    border-style: inset;
+    border-color:black;
+    border-width: 1px;
+    margin:0px 20px;
 }

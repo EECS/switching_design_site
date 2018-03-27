@@ -20,7 +20,9 @@
 
   <button type="button" class="btn btn-primary"> Design Center </button>
   <button type="button" class="btn btn-primary"> Contact </button>
+  {% if paid_site%}
   <button type="button" class="btn btn-secondary">Try Free for {{trial_length}} Days </button>
+  {% endif %}
 </div>
 
 {% endblock %}
@@ -33,26 +35,67 @@
   {% endfor %}
   <h2>Design Electronics provides a simplified understanding to complex circuit design problems.</h2>
   <br>
+  {% if paid_site%}
   <button type="button" class="btn btn-primary">Try Free for {{trial_length}} Days</button>
   <br>
   <p>or <u>purchase now</u>.</p>
+  {% endif %}
 </div>
 
 <div id="home-row-picture">
     {% load static %}
-    <img src="{% static '/img/power-converter.jpg' %}" class="img-fluid" alt="Power Converter" height="400 px">
+    <img src="{% static '/img/power-converter.jpg' %}" class="rounded" alt="Power Converter" height="400 px">
 </div>
 
 {% endblock %}
 
 {% block content %}
 <div id="content-row-header">
-    <h1>Professional circuit design in 5 minutes.</h1>
-    <br>
-    <h2>Design Electronics provides a simplified understanding to complex circuit design problems.</h2>
-    <br>
-    <button type="button" class="btn btn-primary">Try Free for {{trial_length}} Days</button>
-    <br>
-    <p>or <u>purchase now</u>.</p>
-  </div>
+    <h3>Design Center Tools</h3>
+</div>
+
+<!-- Card deck portion of the landing page -->
+<div id="content-row-content">
+    <h4>
+      The design center houses all of the tools that are needed to simplify circuit design. Whereas other resources provide equations
+      and cookie-cutter solutions to designs, the design center will give the designer an intuitive understanding of the mechanics of
+      the design, enabling a deep understanding of the circuitry and ability to intelligently modify the design after construction.
+    </h4>
+</div>
+
+<div class="card-deck" id="content-row-summary">
+  {% if show_power_electronics %}
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Power Electronics</h4>
+        <ul>
+          <li>Switch Mode Power Supplies</li>
+      </ul>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if show_ana_electronics %}
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Analog Electronics</h4>
+        <ul>
+          <li>Switch Mode Power Supplies</li>
+      </ul>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if show_dig_electronics %}
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Digital Electronics</h4>
+        <ul>
+          <li>Digital Circuit Design</li>
+          <li>FPGA Design</li>
+      </ul>
+      </div>
+    </div>
+  {% endif %}
+</div>
 {% endblock %}
