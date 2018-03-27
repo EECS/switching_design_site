@@ -53,5 +53,5 @@
 #example-parameters{
     display: flex;
     text-align: left;
-    justify-content: space-between;
+    justify-content: space-around;
 }
