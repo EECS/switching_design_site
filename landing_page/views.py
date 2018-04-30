@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import ConverterEquation
 
 # Create your views here.
 def index(request):
@@ -23,6 +24,10 @@ def index(request):
     inductance = 10 #microhenries
     capacitance = 100 #microfarads
     load_res = 1.67 #ohms
+
+    #Get model parameters
+    test = ConverterEquation.objects.values("input_output_transfer")
+    print(test)
 
     return render(
         request,
