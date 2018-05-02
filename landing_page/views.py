@@ -26,8 +26,10 @@ def index(request):
     load_res = 1.67 #ohms
 
     #Get model parameters
-    test = ConverterEquation.objects.values("input_output_transfer")
-    print(test)
+    test = ConverterEquation.objects.filter(name="Landing Page Example")
+
+    if len(test) > 0:
+        print(test[0].input_output_transfer)
 
     return render(
         request,
