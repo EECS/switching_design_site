@@ -5,6 +5,7 @@ from .models import ConverterEquation
 def js_math():
     num_points = 1000
     max_frequency = 10 #kHz
+    pass
 
 
 # Create your views here.
