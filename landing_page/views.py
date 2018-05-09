@@ -1,5 +1,11 @@
 from django.shortcuts import render
+import json
 from .models import ConverterEquation
+
+def js_math():
+    num_points = 1000
+    max_frequency = 10 #kHz
+
 
 # Create your views here.
 def index(request):
@@ -26,10 +32,14 @@ def index(request):
     load_res = 1.67 #ohms
 
     #Get model parameters
-    test = ConverterEquation.objects.filter(name="Landing Page Example")
+    modelQuery = ConverterEquation.objects.filter(name="Landing Page Example")
 
-    if len(test) > 0:
-        print(test[0].input_output_transfer)
+    if len(modelQuery) > 0:
+        input_output_transfer = modelQuery[0].input_output_transfer
+        input_impedance = modelQuery[0].input_impedance
+        output_impedance = modelQuery[0].output_impedance
+        duty_output_transfer = modelQuery[0].duty_output_transfer
+        print(input_impedance)
 
     return render(
         request,

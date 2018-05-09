@@ -1,38 +1,39 @@
 var margin = {
-	top: 20,
-	right: 20,
-	bottom: 35,
-	left: 50
+    top: 20,
+    right: 20,
+    bottom: 35,
+    left: 50
 };
 
 var width  = 500 - margin.left - margin.right;
 var height = 250 - margin.top - margin.bottom;
 
 var range = logspace(0,3,5000);
+console.log(range);
 
 var x = d3.scale.log()
-	.domain([1, range[range.length-1].toFixed()])
-	.range([0, width]);
+    .domain([1, range[range.length-1].toFixed()])
+    .range([0, width]);
 
 var xGrid = d3.svg.axis()
-	.scale(x)
-	.orient("bottom")
-	.ticks(5)
-	.tickSize(-height, -height, 0)
-	.tickFormat("");
+    .scale(x)
+    .orient("bottom")
+    .ticks(5)
+    .tickSize(-height, -height, 0)
+    .tickFormat("");
 
 var magY = d3.scale.linear()
-	.domain([0, 7])
-	.range([height, 0]);
+    .domain([0, 7])
+    .range([height, 0]);
 
 var magXAxis1 = d3.svg.axis()
-	.scale(x)
-	.orient("bottom")
-	.ticks(1,"0.1s")
-	.innerTickSize(-6)
-	.outerTickSize(0)
-	.tickPadding(7)
-	.tickFormat("");
+    .scale(x)
+    .orient("bottom")
+    .ticks(1,"0.1s")
+    .innerTickSize(-6)
+    .outerTickSize(0)
+    .tickPadding(7)
+    .tickFormat("");
 
 var magYAxis1 = d3.svg.axis()
 	.scale(magY)

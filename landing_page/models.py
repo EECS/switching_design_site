@@ -22,27 +22,3 @@ class ConverterEquation(models.Model):
         Returns the url to access.
         """
         pass
-
-    def get_in_out_transfer(self):
-        """
-        Returns the input to output transfer function.
-        """
-        return self.input_output_transfer
-    
-    def get_input_impedance(self):
-        """
-        Returns the input impedance transfer function.
-        """
-        return self.input_impedance
-
-    def get_output_impedance(self):
-        """
-        Returns the output impedance transfer function.
-        """
-        return self.output_impedance
-    
-    def get_duty_output_transfer(self):
-        """
-        Returns the duty cycle to output transfer function.
-        """
-        return self.duty_output_transfer
