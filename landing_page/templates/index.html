@@ -1,5 +1,13 @@
 {% extends "base_generic.html" %}
 
+{% block dynamicPlots %}
+  <script>
+    //Global variable for range of bode plots on the x-axis
+    range = JSON.parse('{{ bode_x_range }}');
+  </script>
+
+{% endblock %}
+
 {% block title %}
 <title>{{header_title}}</title>
 

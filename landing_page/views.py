@@ -1,16 +1,36 @@
 from django.shortcuts import render
-import json
+import math, re, numexpr
 from .models import ConverterEquation
 
-def js_math():
-    num_points = 1000
-    max_frequency = 10 #kHz
-    pass
+def js_math(transfer_function):
+    num_points = 500
 
+    start_frequency = 1 #Hz
+    end_frequency = 101 #kHz
+    step_size = int(((end_frequency*1000)-start_frequency)/num_points)
+
+    bode_x_range = [step for step in range(start_frequency, end_frequency*1000, step_size)]
+
+    #Define circuit parameters to graph
+    vals = {"R1": '100', "R2":'10000'}
+    #Replace symbols with values defined in vals dictionary
+    for k, v in vals.items():
+        #Find key and only the key. Example, finds R1 and not R11 by separating on the non-word boundary.
+        transfer_function = re.sub(r"\b"+k+r"\b", v, transfer_function)
+
+    print(transfer_function)
+    print(numexpr.evaluate(transfer_function))
+
+    for f in bode_x_range:
+        pass
+
+    return bode_x_range
 
 # Create your views here.
 def index(request):
-    # Render the HTML template index.html with the data in the context variable
+    #####################################
+    #Index.html parameters
+    #####################################
     show_testimonials = False
     paid_site = False
     trial_length = 14
@@ -21,6 +41,9 @@ def index(request):
     show_ana_electronics = False
     show_dig_electronics = True
 
+    #####################################
+    #Circuit Parameters
+    #####################################
     input_voltage = 24
     output_voltage = 5
     output_current = 3
@@ -32,7 +55,9 @@ def index(request):
     capacitance = 100 #microfarads
     load_res = 1.67 #ohms
 
-    #Get model parameters
+    #####################################
+    #Model Parameters
+    #####################################
     modelQuery = ConverterEquation.objects.filter(name="Landing Page Example")
 
     if len(modelQuery) > 0:
@@ -41,6 +66,8 @@ def index(request):
         output_impedance = modelQuery[0].output_impedance
         duty_output_transfer = modelQuery[0].duty_output_transfer
         print(input_impedance)
+
+    bode_x_range = js_math(input_output_transfer)
 
     return render(
         request,
@@ -61,5 +88,6 @@ def index(request):
                 'inductor_res':inductor_res,
                 'capacitor_res':capacitor_res,
                 'inductance':inductance,
-                'capacitance':capacitance}
+                'capacitance':capacitance,
+                'bode_x_range': bode_x_range}
     )
