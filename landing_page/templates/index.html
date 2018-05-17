@@ -16,20 +16,20 @@
 {% block header %}
 
 <div id = "site-title"class="col-6">
-    <button id="home-button" type="button" class="btn btn-primary"> {{header_title}} </button>
+    <div id="home-button" type="button"> {{header_title}} </div>
 </div>
 
 <div id="header-support" class="col-6">
-  <button type="button" class="btn btn-primary"> Content </button>
+  <div id="right-hdr-btns"> Content </div>
 
   {% if show_testimonials %}
-  <button type="button" class="btn btn-primary">Testimonials</button>
+  <div id="right-hdr-btns">Testimonials</div>
   {% endif %}
 
-  <button type="button" class="btn btn-primary"> Design Center </button>
-  <button type="button" class="btn btn-primary"> Contact </button>
+  <div id="right-hdr-btns"> Design Center </div>
+  <div id="right-hdr-btns"> Contact </div>
   {% if paid_site%}
-  <button type="button" class="btn btn-secondary">Try Free for {{trial_length}} Days </button>
+  <div id="right-hdr-btns">Try Free for {{trial_length}} Days </div>
   {% endif %}
 </div>
 

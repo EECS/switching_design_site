@@ -6,7 +6,7 @@ def js_math(transfer_function):
     num_points = 500
 
     start_frequency = 1 #Hz
-    end_frequency = 101 #kHz
+    end_frequency = 11 #kHz
     step_size = int(((end_frequency*1000)-start_frequency)/num_points)
 
     bode_x_range = [step for step in range(start_frequency, end_frequency*1000, step_size)]
