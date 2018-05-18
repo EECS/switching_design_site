@@ -15,6 +15,7 @@ var margin = {
 var width  = 500 - margin.left - margin.right;
 var height = 250 - margin.top - margin.bottom;
 
+
 var x = d3.scale.log()
     .domain([1, range[range.length-1].toFixed()])
     .range([0, width]);
@@ -26,9 +27,24 @@ var xGrid = d3.svg.axis()
     .tickSize(-height, -height, 0)
     .tickFormat("");
 
-var magY = d3.scale.linear()
-    .domain([0, 7])
-    .range([height, 0]);
+
+// Variable that sets the magnitude data range y axis data range.
+// Dynamically re-sizes based upon transfer function maximum and minimum.
+if(db_mag_data.length > 0){
+    if(mags_min == mags_max){
+        var magY = d3.scale.linear()
+            .domain([mags_min-10, mags_max+10])
+            .range([height, 0]);
+    }else{
+        var magY = d3.scale.linear()
+            .domain([mags_min, mags_max])
+            .range([height, 0]);
+    }
+}else{
+    var magY = d3.scale.linear()
+        .domain([-20, 20])
+        .range([height, 0]);
+}
 
 var magXAxis1 = d3.svg.axis()
     .scale(x)
@@ -36,7 +52,7 @@ var magXAxis1 = d3.svg.axis()
     .ticks(1,"0.1s")
     .innerTickSize(-6)
     .outerTickSize(0)
-    .tickPadding(7)
+    .tickPadding(7);
 
 var magYAxis1 = d3.svg.axis()
     .scale(magY)
@@ -75,16 +91,30 @@ var magLine = d3.svg.line()
     .x(function(d) { return x(d.x); })
     .y(function(d) { return magY(d.y); })
     .interpolate("linear");
-  
+
 var magZoom = d3.behavior.zoom()
     .x(x)
     .y(magY)
     .scaleExtent([1, 1])
     .on("zoom",redraw);
 
-var phsY = d3.scale.linear()
-    .domain([0, 45])
-    .range([height, 0]);
+// Variable that sets the phase data y axis data range.
+// Dynamically re-sizes based upon transfer function maximum and minimum.
+if(phase_data.length > 0){
+    if(phase_min == phase_max){
+    var phsY = d3.scale.linear()
+        .domain([-45, 45])
+        .range([height, 0]);
+    }else{
+        var phsY = d3.scale.linear()
+            .domain([phase_min, phase_max])
+            .range([height, 0]);
+    }
+}else{
+    var phsY = d3.scale.linear()
+        .domain([-45, 45])
+        .range([height, 0]);
+}
 
 var phsXAxis1 = d3.svg.axis()
     .scale(x)
@@ -131,7 +161,7 @@ var phsLine = d3.svg.line()
     .x(function(d) { return x(d.x); })
     .y(function(d) { return phsY(d.y); })
     .interpolate("linear");
-  
+
 var phsZoom = d3.behavior.zoom()
     .x(x)
     .y(phsY)
@@ -145,7 +175,7 @@ var plotMag = d3.select("#plotmag").append("svg")
     .append("g")
     .attr("transform","translate(" + margin.left + "," + margin.top + ")")
     .call(magZoom);
-
+    
 // Append x grid
 plotMag.append("g")
     .attr("class","x grid")
@@ -155,14 +185,14 @@ plotMag.append("g")
 // Append y grid
 plotMag.append("g")
 	.attr("class","y grid")
-	.call(magYGrid);
-
+    .call(magYGrid);
+    
 // Append x axis
 plotMag.append("g")
 	.attr("class","x1 axis")
 	.attr("transform","translate(0," + height + ")")
-	.call(magXAxis1);
-
+    .call(magXAxis1);
+    
 // Append additional X axis
 plotMag.append("g")
     .attr("class","x2 axis")
@@ -172,21 +202,21 @@ plotMag.append("g")
 // Append y axis
 plotMag.append("g")
 	.attr("class","y1 axis")
-	.call(magYAxis1);
-
+    .call(magYAxis1);
+    
 // Append additional y axis
 plotMag.append("g")
 	.attr("class","y2 axis")
 	.attr("transform","translate(" + [width, 0] + ")")
-	.call(magYAxis2);
-
+    .call(magYAxis2);
+    
 // Add x axis label
 plotMag.append("text")
 	.attr("transform","translate(" + (width / 2) + "," + (height + margin.bottom - 5) + ")")
 	.style("font-size","15")
 	.style("text-anchor","middle")
-	.text("Frequency [Hz]");
-
+    .text("Frequency [Hz]");
+    
 // Add y axis label
 plotMag.append("text")
 	.attr("transform", "rotate(-90)")
@@ -195,7 +225,7 @@ plotMag.append("text")
 	.attr("dy", "1em")
 	.style("font-size","15")
 	.style("text-anchor", "middle")
-	.text("Magnitude [dB]");
+    .text("Magnitude [dB]");
 
 // Clip path
 plotMag.append("defs").append("clipPath")
@@ -203,59 +233,59 @@ plotMag.append("defs").append("clipPath")
 	.append("rect")
 	.attr("width", width)
 	.attr("height", height);
-  
+
 plotMag.append("rect")
 	.attr("width", width)
 	.attr("height", height);
-	
+
 // Create plot
 var plotPhs = d3.select("#plotphs").append("svg")
-	.attr("width",width + margin.left + margin.right)
-	.attr("height",height + margin.top + margin.bottom)
-	.append("g")
-	.attr("transform","translate(" + margin.left + "," + margin.top + ")")
-	.call(phsZoom);
-  
+    .attr("width",width + margin.left + margin.right)
+    .attr("height",height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform","translate(" + margin.left + "," + margin.top + ")")
+    .call(phsZoom);
+
 // Append x grid
 plotPhs.append("g")
-	.attr("class","x grid")
-	.attr("transform","translate(0," + height + ")")
-	.call(xGrid);
+    .attr("class","x grid")
+    .attr("transform","translate(0," + height + ")")
+    .call(xGrid);
 
 // Append y grid
 plotPhs.append("g")
-	.attr("class","y grid")
-	.call(phsYGrid);
+    .attr("class","y grid")
+    .call(phsYGrid);
 
 // Append x axis
 plotPhs.append("g")
-	.attr("class","x1 axis")
-	.attr("transform","translate(0," + height + ")")
-	.call(phsXAxis1);
+    .attr("class","x1 axis")
+    .attr("transform","translate(0," + height + ")")
+    .call(phsXAxis1);
 
 // Append additional X axis
 plotPhs.append("g")
-	.attr("class","x2 axis")
-	.attr("transform","translate(" + [0, 0] + ")")
-	.call(phsXAxis2);
+    .attr("class","x2 axis")
+    .attr("transform","translate(" + [0, 0] + ")")
+    .call(phsXAxis2);
 
 // Append y axis
 plotPhs.append("g")
-	.attr("class","y1 axis")
-	.call(phsYAxis1);
+    .attr("class","y1 axis")
+    .call(phsYAxis1);
 
 // Append additional y axis
 plotPhs.append("g")
-	.attr("class","y2 axis")
-	.attr("transform","translate(" + [width, 0] + ")")
-	.call(phsYAxis2);
+    .attr("class","y2 axis")
+    .attr("transform","translate(" + [width, 0] + ")")
+    .call(phsYAxis2);
 
 // Add x axis label  
 plotPhs.append("text")
-	.attr("transform","translate(" + (width / 2) + "," + (height + margin.bottom - 5) + ")")
-	.style("font-size","15")
-	.style("text-anchor","middle")
-	.text("Frequency [Hz]");
+    .attr("transform","translate(" + (width / 2) + "," + (height + margin.bottom - 5) + ")")
+    .style("font-size","15")
+    .style("text-anchor","middle")
+    .text("Frequency [Hz]");
 
 // Add y axis label
 plotPhs.append("text")
@@ -292,21 +322,24 @@ function redraw() {
     plotPhs.select(".y2.axis").call(phsYAxis2);
     plotPhs.select(".x.grid").call(xGrid);
     plotPhs.select(".y.grid").call(phsYGrid);
-	
+
     var dataMag = [];
     var dataPhs = [];
     var magDataPoints = [];
     var phaseDataPoints = [];
 
-    magDataPoints.push({
-        x: range,
-        y: db_mag_data
-    });
+    //Push magnitude and phase data into graph.
+    for(var i = 0; i < range.length; i++){
+        phaseDataPoints.push({
+            x: range[i],
+            y: phase_data[i]
+        });
 
-    phaseDataPoints.push({
-        x: range,
-        y: phase_data
-    });
+        magDataPoints.push({
+            x: range[i],
+            y: db_mag_data[i]
+        });
+    }
 
     dataMag.push({data: magDataPoints, width: 1, color: 'blue', stroke: "0,0", legend: "Magnitude" });
 
