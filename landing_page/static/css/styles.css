@@ -1,5 +1,11 @@
 body{
     text-align: center;
+    font-family: AtlasGrotesk;
+    font-weight: 100;
+}
+
+a{
+    color: black;
 }
 
 #header-row{
@@ -8,17 +14,12 @@ body{
     width: 100%;
     background-color: #c2def0;
     padding:25px;
-    border-bottom-style: solid;
-    border-bottom-color:black;
-    border-bottom-width: 1px;
-    font-family: sans-serif;
     font-size: x-large;
 }
 
 #header-support{
     margin-left: auto;
     display: flex;
-
 }
 
 #right-hdr-btns{
@@ -27,24 +28,38 @@ body{
 
 #home-row{
     display: flex;
-    margin: 200px 200px 0px 200px;
-    border-bottom-style: solid;
-    border-bottom-color:black;
-    border-bottom-width: 1px;
-    height:600px;
+    background-color: #c2def0;
+    height: 800px;
     text-align: left;
 }
 
+#home-row-content{
+    margin: 20%;
+    display: flex;
+}
+
+#home-row-content h2{
+    font-size: 18pt;
+}
+
+#home-row-content h1{
+    font-size: 36pt;
+}
+
+
 #content-row{
-    margin: 0px 200px 200px 200px;
+    padding: 5% 20%;
     border-bottom-style: solid;
     border-bottom-color:black;
     border-bottom-width: 1px;
 }
 
 #content-row-header{
-    margin:50px 0px;
-    text-align: center;
+    margin:0px 0px 50px 0px;
+}
+
+#content-row-content{
+    text-align: left;
 }
 
 .card-deck{
@@ -57,14 +72,22 @@ body{
     border-color:black;
     border-width: 1px;
     margin:0px 20px;
+    text-align: left;
 }
 
-#content-row-example{
-    text-align: center;
+#example-design-content{
+    padding: 5% 20%;
 }
 
 #example-parameters{
     display: flex;
     text-align: left;
     justify-content: space-around;
+}
+
+#contact-row-content{
+    padding: 5% 20%;
+    border-style: solid;
+    border-color:black;
+    border-width: 1px;
 }

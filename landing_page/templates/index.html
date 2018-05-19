@@ -22,18 +22,19 @@
 {% block header %}
 
 <div id = "site-title"class="col-6">
-    <div id="home-button" type="button"> {{header_title}} </div>
+    <div id="home-button" type="button"> <a href="#home-row">{{header_title}}</a></div>
 </div>
 
 <div id="header-support" class="col-6">
-  <div id="right-hdr-btns"> Content </div>
+  <div id="right-hdr-btns"> <a href="#content-row"> Content </a></div>
+  <div id="right-hdr-btns"><a href="#example-design">Example Design</a></div>
 
   {% if show_testimonials %}
-  <div id="right-hdr-btns">Testimonials</div>
+  <div id="right-hdr-btns"> <a href="">Testimonials</a></div>
   {% endif %}
 
-  <div id="right-hdr-btns"> Design Center </div>
-  <div id="right-hdr-btns"> Contact </div>
+  <div id="right-hdr-btns"><a href="">Design Center</a></div>
+  <div id="right-hdr-btns"><a href="#contact-row">Contact</a></div>
   {% if paid_site%}
   <div id="right-hdr-btns">Try Free for {{trial_length}} Days </div>
   {% endif %}
@@ -43,22 +44,26 @@
 
 {% block home %}
 <div id="home-row-content">
-  <h1>Professional circuit design in 5 minutes.</h1>
-  {% for i in tag_break_lines %}
-  <br>
-  {% endfor %}
-  <h2>Design Electronics provides a simplified understanding to complex circuit design problems.</h2>
-  <br>
-  {% if paid_site%}
-  <button type="button" class="btn btn-primary">Try Free for {{trial_length}} Days</button>
-  <br>
-  <p>or <u>purchase now</u>.</p>
-  {% endif %}
-</div>
+  <div>
+    <h1>Professional circuit design in 5 minutes.</h1>
+    {% for i in tag_break_lines %}
+    <br>
+    {% endfor %}
+    <h2>Design Electronics provides a simplified understanding to complex circuit design problems.</h2>
+    <br>
+    {% if paid_site%}
+    <button type="button" class="btn btn-primary">Try Free for {{trial_length}} Days</button>
+    <br>
+    <p>or <u>purchase now</u>.</p>
+    {% endif %}
+  </div>
+  
 
-<div id="home-row-picture">
+  <div id="home-row-picture">
     {% load static %}
     <img src="{% static '/img/power-converter.jpg' %}" class="rounded" alt="Power Converter" height="400 px">
+  </div>
+
 </div>
 
 {% endblock %}
@@ -115,23 +120,7 @@
 {% endblock %}
 
 {% block example_design %}
-<div id="example-design-row-header">
-    <h3>Example Design in Design Center</h3>
-</div>
-
-<div id="example-design-row-photo">
-  <h3>CIRCUIT PHOTO GOES HERE</h3>
-</div>
-
-<div id="example-design-row-description">
-  <h3>CIRCUIT PROBLEM DESCRIPTION GOES HERE</h3>
-</div>
-
-<div id="example-design-row-plots">
-  <div id="plotmag"></div>
-  <div id="plotphs" style="margin-top: -10px;"></div>
-
-<div id="content-row-example">
+<div id="example-design-content">
     <div id="example-title">
       <h3>Example Design in the Design Center</h4>
     </div>
@@ -160,6 +149,29 @@
         <p>Inductor DC Resistance: {{inductor_res}} m&#8486;</p>
         <p>Q1 On Resistance: {{q1_on_res}} m&#8486;</p>
       </div>
-  </div>
+    </div>
+
+    <div id="example-design-row-plots">
+      <div id="plotmag"></div>
+      <div id="plotphs" style="margin-top: -10px;">
+    </div>
+</div>
+{% endblock %}
+
+{% block contact_row %}
+<div id="contact-row-content">
+  <div>Contact me using the links below:</div>
+  <a class="btn btn-block btn-social btn-google">
+    <span class="fa fa-google"></span>
+    GMAIL
+  </a>
+  <a class="btn btn-block btn-social btn-linkedin">
+      <span class="fa fa-linkedin"></span>
+      LINKEDIN
+    </a>
+    <a class="btn btn-block btn-social btn-github">
+        <span class="fa fa-github"></span>
+        GITHUB
+      </a>
 </div>
 {% endblock %}
